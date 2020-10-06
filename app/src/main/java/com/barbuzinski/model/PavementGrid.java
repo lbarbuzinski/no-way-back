@@ -1,12 +1,8 @@
 package com.barbuzinski.model;
 
-import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-
-import com.barbuzinski.android.MetricsFactory;
 
 import java.util.Objects;
 
@@ -14,14 +10,12 @@ public abstract class PavementGrid {
 
     static final int CELL_PADDING = 2;
 
-    protected ScreenPosition currentPosition = new ScreenPosition(0, 0);
-
     protected Vehicle vehicle;
 
     protected DisplayMetrics metrics;
 
-    protected PavementGrid(Context context, MetricsFactory metricsFactory) {
-        this.metrics = metricsFactory.create(context);
+    protected PavementGrid(DisplayMetrics metrics) {
+        this.metrics = metrics;
     }
 
     public void onPavementTouched(MotionEvent event) {
@@ -36,11 +30,7 @@ public abstract class PavementGrid {
     public abstract int getCellWidthPixels();
     public abstract int getCellHeightPixels();
     public abstract int getWidthCellsIso();
-
-    public abstract int getLogicalHeight();
-    public abstract int getLogicalWidth();
-
-    public abstract int getCellWidth();
+    public abstract int getHeightCellsIso();
 
     public abstract void draw(Canvas canvas);
 
@@ -83,19 +73,19 @@ public abstract class PavementGrid {
         }
 
         public Cell upLeft() {
-            return x > 0 ? new Cell(this.x-1, this.y) : this;
+            return new Cell(this.x-1, this.y);
         }
 
         public Cell upRight() {
-            return y > 0 ? new Cell(this.x, this.y-1) : this;
+            return new Cell(this.x, this.y-1);
         }
 
         public Cell downLeft() {
-            return y < PavementGrid.this.getLogicalHeight() ? new Cell(this.x, this.y+1) : this;
+            return new Cell(this.x, this.y+1);
         }
 
         public Cell downRight() {
-            return x < PavementGrid.this.getLogicalWidth() ? new Cell(this.x+1, this.y) : this;
+            return new Cell(this.x+1, this.y);
         }
 
         private int computeX() {

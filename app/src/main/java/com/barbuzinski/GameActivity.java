@@ -6,10 +6,6 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.barbuzinski.android.DrawableGridFactory;
-import com.barbuzinski.android.MetricsFactory;
-import com.barbuzinski.android.PaintFactory;
-
 public class GameActivity extends AppCompatActivity {
 
     @Override
@@ -21,7 +17,7 @@ public class GameActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(new GameView(this, new DrawableGridFactory(), new MetricsFactory(), new PaintFactory()));
+        setContentView(new GameView(this));
     }
 
 }

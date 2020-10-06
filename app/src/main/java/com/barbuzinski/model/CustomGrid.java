@@ -1,63 +1,75 @@
 package com.barbuzinski.model;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Point;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
-import android.view.MotionEvent;
 
-import androidx.core.content.res.ResourcesCompat;
+import com.barbuzinski.android.PaintFactory;
 
-import com.barbuzinski.R;
+public class CustomGrid extends PavementGrid {
 
-import java.util.Objects;
+    private LogicalGrid logicalGrid;
 
-public class CustomGrid {
+    private Drawable drawableCell;
 
-    private int widthCellsIso = 5;
-    private int heightCellsIso = 5;
+    public CustomGrid(DisplayMetrics metrics, LogicalGrid logicalGrid, Drawable drawableCell, PaintFactory paintFactory) {
+        super(metrics);
+        this.logicalGrid = logicalGrid;
+        this.drawableCell = drawableCell;
 
-    private int cellWidth;
-    private int cellHeight;
+        vehicle = new Vehicle(
+                this,
+                new Cell(1, 0),
+                paintFactory);
+    }
 
-    private Resources res;
-    private Drawable drawableGrid;
-    private Vehicle vehicle;
-
-    private DisplayMetrics metrics = new DisplayMetrics();
-
-    private Point destPosition = new Point(0, 0);
-    private Point prevPosition = new Point(0, 0);
-    private Point currentPosition = new Point(0, 0);
-
+    @Override
     public int getCellWidthPixels() {
-        return metrics.widthPixels / widthCellsIso;
+        return metrics.widthPixels / getWidthCellsIso();
     }
 
+    @Override
     public int getCellHeightPixels() {
-        return metrics.widthPixels / 2 / heightCellsIso;
+        return getCellWidthPixels() / 2;
     }
 
+    @Override
     public int getWidthCellsIso() {
-        return widthCellsIso;
+        return logicalGrid.getWidthCellsIso();
     }
 
-    public int getLogicalHeight() {
-        return heightCellsIso;
+    @Override
+    public int getHeightCellsIso() {
+        return logicalGrid.getHeightCellsIso();
     }
 
+    @Override
     public void draw(Canvas canvas) {
-        if (!currentPosition.equals(destPosition)) {
-            int xDiff = destPosition.x;
-            int yDiff = destPosition.y;
-        } else {
-            prevPosition.set(destPosition.x, destPosition.y);
+        canvas.drawColor(Color.WHITE);
+
+        for (int i = 0; i < logicalGrid.getLogicalWidthCells(); i++) {
+            for (int j = 0; j < logicalGrid.getLogicalHeightCells(); j++) {
+                Cell cell = logicalGrid.getCell(this, i, j);
+                if (cell != null) {
+                    ScreenPosition centerPosition = cell.getPosition();
+                    int x = centerPosition.getX() - getCellWidthPixels() / 2;
+                    int y = centerPosition.getY() - getCellHeightPixels() / 2;
+                    drawableCell.setBounds(
+                            x,
+                            y,
+                            x + getCellWidthPixels(),
+                            y + getCellWidthPixels());
+                    drawableCell.draw(canvas);
+                }
+            }
         }
-        drawableGrid.draw(canvas);
+
         vehicle.draw(canvas);
     }
 
+    @Override
+    public boolean needsToBeRedrawn() {
+        return true;
+    }
 }

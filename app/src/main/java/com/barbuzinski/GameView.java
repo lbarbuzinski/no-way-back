@@ -5,26 +5,42 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.barbuzinski.android.DrawableGridFactory;
+import com.barbuzinski.android.DrawablesFactory;
 import com.barbuzinski.android.MetricsFactory;
 import com.barbuzinski.android.PaintFactory;
+import com.barbuzinski.model.CustomGrid;
+import com.barbuzinski.model.LogicalGridFactory;
 import com.barbuzinski.model.PavementGrid;
-import com.barbuzinski.model.RectangularGrid;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+
+    private MetricsFactory metricsFactory = new MetricsFactory();
+    private DrawablesFactory drawableGridFactory = new DrawablesFactory();
+    private PaintFactory paintFactory = new PaintFactory();
+    private LogicalGridFactory gridFactory = new LogicalGridFactory();
 
     private GameThread thread;
     private PavementGrid grid;
     private Paint paint;
 
-    public GameView(Context context, DrawableGridFactory drawableGridFactory, MetricsFactory metricsFactory, PaintFactory paintFactory) {
+    public GameView(Context context) {
         super(context);
-        grid = new RectangularGrid(getContext(), drawableGridFactory, metricsFactory, paintFactory);
+        DisplayMetrics metrics = metricsFactory.create(getContext());
+        grid = new CustomGrid(
+                metrics,
+                gridFactory.createDefault(),
+                drawableGridFactory.createDrawableCell(getContext().getResources()),
+                paintFactory);
+//        grid = new RectangularFixedGrid(
+//                metrics,
+//                drawableGridFactory.createDefaultGrid(getContext().getResources(), metrics),
+//                paintFactory);
         getHolder().addCallback(this);
 
         paint = new Paint();

@@ -11,7 +11,7 @@ public class PaintFactory {
         return p;
     }
 
-    public Paint createRed() {
+    public Paint createForVehicle() {
         return create(255, 0, 0);
     }
 }

@@ -10,18 +10,20 @@ import static com.barbuzinski.model.PavementGrid.CELL_PADDING;
 
 public class Vehicle {
 
+    private PavementGrid grid;
     private PavementGrid.Cell currentCell;
     private PavementGrid.Cell destCell;
     private AnimatedPosition currentAnimation;
     private int radius;
     private Paint vPaint;
 
-    public Vehicle(PavementGrid grid, RectangularGrid.Cell currentCell, PaintFactory paintFactory) {
+    public Vehicle(PavementGrid grid, RectangularFixedGrid.Cell currentCell, PaintFactory paintFactory) {
+        this.grid = grid;
         this.currentCell = currentCell;
         this.currentAnimation = initial(currentCell.getPosition());
-        this.radius = grid.getCellWidth() / 3 - CELL_PADDING;
+        this.radius = grid.getCellWidthPixels() / 3 - CELL_PADDING;
 
-        this.vPaint = paintFactory.createRed();
+        this.vPaint = paintFactory.createForVehicle();
     }
 
     public ScreenPosition getCurrentPosition() {
@@ -56,7 +58,7 @@ public class Vehicle {
         }
 
         ScreenPosition next = currentAnimation.currentPosition();
-        canvas.drawCircle(next.getX(), next.getY(), radius, vPaint);
+        canvas.drawCircle(next.getX(), next.getY() - grid.getCellHeightPixels() / 3, radius, vPaint);
     }
 
 

@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
-import com.barbuzinski.android.DrawableGridFactory;
+import com.barbuzinski.android.DrawablesFactory;
 import com.barbuzinski.android.MetricsFactory;
 import com.barbuzinski.android.PaintFactory;
 
@@ -35,7 +35,7 @@ public class TouchSideTest {
     private Drawable drawableGrid;
 
     @Mock
-    private DrawableGridFactory drawableGridFactory;
+    private DrawablesFactory drawableGridFactory;
 
     @Mock
     private MetricsFactory metricsFactory;
@@ -52,9 +52,9 @@ public class TouchSideTest {
         metrics.heightPixels = HEIGHT_PIXELS;
 
         when(metricsFactory.create(context)).thenReturn(metrics);
-        when(drawableGridFactory.create(any())).thenReturn(drawableGrid);
+        when(drawableGridFactory.createDefaultGrid(any())).thenReturn(drawableGrid);
 
-        grid = new RectangularGrid(context, drawableGridFactory, metricsFactory, paintFactory);
+        grid = new RectangularFixedGrid(context, drawableGridFactory, metricsFactory, paintFactory);
     }
 
     @Test
