@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
-import com.barbuzinski.android.DrawablesFactory;
 import com.barbuzinski.android.MetricsFactory;
 import com.barbuzinski.android.PaintFactory;
 
@@ -16,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertSame;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -35,13 +33,13 @@ public class TouchSideTest {
     private Drawable drawableGrid;
 
     @Mock
-    private DrawablesFactory drawableGridFactory;
-
-    @Mock
     private MetricsFactory metricsFactory;
 
     @Mock
     private PaintFactory paintFactory;
+
+    @Mock
+    private LogicalGridFactory logicalGridFactory;
 
     private PavementGrid grid;
 
@@ -52,9 +50,8 @@ public class TouchSideTest {
         metrics.heightPixels = HEIGHT_PIXELS;
 
         when(metricsFactory.create(context)).thenReturn(metrics);
-        when(drawableGridFactory.createDefaultGrid(any())).thenReturn(drawableGrid);
 
-        grid = new RectangularFixedGrid(context, drawableGridFactory, metricsFactory, paintFactory);
+        grid = new CustomGrid(metrics, logicalGridFactory, drawableGrid, paintFactory);
     }
 
     @Test

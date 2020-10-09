@@ -34,7 +34,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         DisplayMetrics metrics = metricsFactory.create(getContext());
         grid = new CustomGrid(
                 metrics,
-                gridFactory.createDefault(),
+                gridFactory,
                 drawableGridFactory.createDrawableCell(getContext().getResources()),
                 paintFactory);
 //        grid = new RectangularFixedGrid(

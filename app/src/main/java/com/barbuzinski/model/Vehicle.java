@@ -11,15 +11,19 @@ import static com.barbuzinski.model.PavementGrid.CELL_PADDING;
 public class Vehicle {
 
     private PavementGrid grid;
-    private PavementGrid.Cell currentCell;
-    private PavementGrid.Cell destCell;
+    private Cell initialCell;
+    private Cell currentCell;
+    private Cell destCell;
     private AnimatedPosition currentAnimation;
     private int radius;
     private Paint vPaint;
+    private boolean destroyed;
 
-    public Vehicle(PavementGrid grid, RectangularFixedGrid.Cell currentCell, PaintFactory paintFactory) {
+    public Vehicle(PavementGrid grid, Cell initialCell, PaintFactory paintFactory) {
         this.grid = grid;
-        this.currentCell = currentCell;
+        this.initialCell = initialCell;
+        this.currentCell = initialCell;
+        this.destCell = initialCell;
         this.currentAnimation = initial(currentCell.getPosition());
         this.radius = grid.getCellWidthPixels() / 3 - CELL_PADDING;
 
@@ -31,30 +35,39 @@ public class Vehicle {
     }
 
     public void upLeft() {
-        setDestCell(currentCell.upLeft());
+        setDestCell(currentCell.getLeft());
     }
 
     public void upRight() {
-        setDestCell(currentCell.upRight());
+        setDestCell(currentCell.getTop());
     }
 
     public void downLeft() {
-        setDestCell(currentCell.downLeft());
+        setDestCell(currentCell.getBottom());
     }
 
     public void downRight() {
-        setDestCell(currentCell.downRight());
+        setDestCell(currentCell.getRight());
     }
 
-    private void setDestCell(PavementGrid.Cell destCell) {
+    private void setDestCell(Cell destCell) {
         if (currentAnimation.isDone())
             this.destCell = destCell;
     }
 
     public void draw(Canvas canvas) {
-        if (currentAnimation.isDone() && destCell != null && !currentCell.equals(destCell)) {
-            currentAnimation = AnimatedPosition.start(currentCell.getPosition(), destCell.getPosition());
-            this.currentCell = destCell;
+        if (currentAnimation.isDone()) {
+            if (destroyed) {
+                this.currentCell = initialCell;
+                this.destCell = initialCell;
+                this.currentAnimation = initial(currentCell.getPosition());
+                destroyed = false;
+            } else if (!currentCell.equals(destCell)) {
+                currentAnimation = AnimatedPosition.start(currentCell.getPosition(), destCell.getPosition());
+                this.currentCell = destCell;
+                if (currentCell.isEmpty())
+                    destroyed = true;
+            }
         }
 
         ScreenPosition next = currentAnimation.currentPosition();

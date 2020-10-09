@@ -2,40 +2,39 @@ package com.barbuzinski.model;
 
 public class LogicalGrid {
 
+    public static final int FIXED = -1;
     public static final int EMPTY = 0;
-    public static final int FIXED = 1;
-    public static final int SINGLE = 2;
-    public static final int DOUBLE = 3;
+    public static final int SINGLE = 1;
+    public static final int DOUBLE = 2;
 
     private int widthCellsIso;
     private int heightCellsIso;
 
-    private int[][] gridDefinition;
+    private Cell[][] cellsMatrix;
+    private GridSizeData gridSizeData;
 
-    public LogicalGrid(int widthCellsIso, int heightCellsIso, int[][] gridDefinition) {
-        this.widthCellsIso = widthCellsIso;
-        this.heightCellsIso = heightCellsIso;
-        this.gridDefinition = gridDefinition;
+    public LogicalGrid(GridSizeData gridSizeData, Cell[][] cellsMatrix) {
+        this.gridSizeData = gridSizeData;
+        this.cellsMatrix = cellsMatrix;
     }
 
     public int getWidthCellsIso() {
-        return widthCellsIso;
+        return gridSizeData.getWidthCellsIso();
     }
 
-    public int getHeightCellsIso() {
-        return heightCellsIso;
+    public int getCellWidthPixels() {
+        return gridSizeData.getCellWidthPixels();
     }
 
     public int getLogicalWidthCells() {
-        return gridDefinition.length;
+        return cellsMatrix.length;
     }
 
     public int getLogicalHeightCells() {
-        return gridDefinition[0].length;
+        return cellsMatrix[0].length;
     }
 
-    public PavementGrid.Cell getCell(PavementGrid grid, int column, int row) {
-        int i = gridDefinition[row][column];
-        return i != EMPTY ? grid.new Cell(column, row) : null;
+    public Cell getCell(int column, int row) {
+        return cellsMatrix[row][column];
     }
 }

@@ -4,8 +4,6 @@ import android.graphics.Canvas;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
-import java.util.Objects;
-
 public abstract class PavementGrid {
 
     static final int CELL_PADDING = 2;
@@ -30,7 +28,6 @@ public abstract class PavementGrid {
     public abstract int getCellWidthPixels();
     public abstract int getCellHeightPixels();
     public abstract int getWidthCellsIso();
-    public abstract int getHeightCellsIso();
 
     public abstract void draw(Canvas canvas);
 
@@ -52,66 +49,4 @@ public abstract class PavementGrid {
         vehicle.downRight();
     }
 
-    class Cell {
-
-        private int x;
-        private int y;
-        private ScreenPosition centerPosition;
-
-        public Cell(int x, int y) {
-            this.x = x;
-            this.y = y;
-            this.centerPosition = new ScreenPosition(computeX(), computeY());
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public Cell upLeft() {
-            return new Cell(this.x-1, this.y);
-        }
-
-        public Cell upRight() {
-            return new Cell(this.x, this.y-1);
-        }
-
-        public Cell downLeft() {
-            return new Cell(this.x, this.y+1);
-        }
-
-        public Cell downRight() {
-            return new Cell(this.x+1, this.y);
-        }
-
-        private int computeX() {
-            return (getX() - getY() + PavementGrid.this.getWidthCellsIso()) * PavementGrid.this.getCellWidthPixels() / 2;
-        }
-
-        private int computeY() {
-            return (getX() + getY() - PavementGrid.this.getWidthCellsIso() + 2) * PavementGrid.this.getCellHeightPixels() / 2;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Cell that = (Cell) o;
-            return x == that.x &&
-                    y == that.y;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
-
-        public ScreenPosition getPosition() {
-            return centerPosition;
-        }
-    }
 }
