@@ -2,7 +2,7 @@ package com.barbuzinski.model.vehicle.animation;
 
 import android.graphics.Canvas;
 
-import com.barbuzinski.model.GridSizeData;
+import com.barbuzinski.model.GridData;
 import com.barbuzinski.utils.ProgressCompletedCallback;
 import com.barbuzinski.utils.StaticPosition;
 
@@ -21,8 +21,8 @@ public class Drive extends TranslationAnimation {
         FOR_VEHICLE.setAlpha(255);
 
         StaticPosition position = position(progress.progress());
-        canvas.drawCircle(position.getX(), (float) (position.getY() - GridSizeData.getCellHeightPixels() / 3),
-                GridSizeData.getCellWidthPixels() / 3 - 2,
+        canvas.drawCircle(position.getX(), (float) (position.getY() - GridData.getCellHeightPixels() / 3),
+                GridData.getCellWidthPixels() / 3 - 2,
                 FOR_VEHICLE);
     }
 }

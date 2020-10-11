@@ -1,12 +1,10 @@
 package com.barbuzinski.model.vehicle;
 
-import android.util.DisplayMetrics;
-
+import com.barbuzinski.model.AbstractGameViewTest;
 import com.barbuzinski.model.Cell;
-import com.barbuzinski.model.GridSizeData;
-import com.barbuzinski.model.LogicalGrid;
+import com.barbuzinski.model.Grid;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.barbuzinski.model.vehicle.state.VehicleStateEnum.DESTROYING;
@@ -14,13 +12,13 @@ import static com.barbuzinski.model.vehicle.state.VehicleStateEnum.IDLE;
 import static com.barbuzinski.model.vehicle.state.VehicleStateEnum.RIDING;
 import static org.junit.Assert.assertEquals;
 
-public class VehicleTest {
+public class VehicleTest extends AbstractGameViewTest {
 
-    private Cell singleCell = new Cell(1, 1, LogicalGrid.SINGLE);
+    private Cell singleCell;
 
-    @BeforeClass
-    public static void setUpClass() {
-        GridSizeData.init(new DisplayMetrics());
+    @Before
+    public void setUp() {
+        singleCell = new Cell(1, 1, Grid.SINGLE);
     }
 
     @Test
@@ -39,7 +37,7 @@ public class VehicleTest {
 
     @Test
     public void shouldDrive() {
-        new Cell(1, 2, LogicalGrid.SINGLE).setTop(singleCell);
+        new Cell(1, 2, Grid.SINGLE).setTop(singleCell);
         Vehicle v = new Vehicle(singleCell);
         v.downLeft();
 

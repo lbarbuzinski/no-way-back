@@ -2,7 +2,7 @@ package com.barbuzinski.model;
 
 import com.barbuzinski.utils.StaticPosition;
 
-import static com.barbuzinski.model.LogicalGrid.EMPTY;
+import static com.barbuzinski.model.Grid.EMPTY;
 
 public class Cell {
 
@@ -32,11 +32,11 @@ public class Cell {
     }
 
     private int computeX() {
-        return (getX() - getY() + GridSizeData.getWidthCellsIso()) * GridSizeData.getCellWidthPixels() / 2;
+        return (getX() - getY() + GridData.getWidthCellsIso()) * GridData.getCellWidthPixels() / 2;
     }
 
     private int computeY() {
-        return (getX() + getY() - GridSizeData.getWidthCellsIso() + 2) * GridSizeData.getCellHeightPixels() / 2;
+        return (getX() + getY() - GridData.getWidthCellsIso() + 2) * GridData.getCellHeightPixels() / 2;
     }
 
     public Cell getLeft() {

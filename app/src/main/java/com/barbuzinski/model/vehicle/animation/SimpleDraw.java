@@ -3,7 +3,7 @@ package com.barbuzinski.model.vehicle.animation;
 import android.graphics.Canvas;
 
 import com.barbuzinski.android.PaintFactory;
-import com.barbuzinski.model.GridSizeData;
+import com.barbuzinski.model.GridData;
 import com.barbuzinski.utils.StaticPosition;
 
 import java.util.Optional;
@@ -21,8 +21,8 @@ public class SimpleDraw extends VehicleAnimation {
     @Override
     public void draw(Canvas canvas) {
         FOR_VEHICLE.setAlpha(255);
-        canvas.drawCircle(position.getX(), (float) (position.getY() - GridSizeData.getCellHeightPixels() / 3),
-                GridSizeData.getCellWidthPixels() / 3 - 2,
+        canvas.drawCircle(position.getX(), (float) (position.getY() - GridData.getCellHeightPixels() / 3),
+                GridData.getCellWidthPixels() / 3 - 2,
                 PaintFactory.FOR_VEHICLE);
     }
 
