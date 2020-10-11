@@ -11,11 +11,12 @@ import org.junit.Test;
 
 import static com.barbuzinski.model.vehicle.state.VehicleStateEnum.DESTROYING;
 import static com.barbuzinski.model.vehicle.state.VehicleStateEnum.IDLE;
+import static com.barbuzinski.model.vehicle.state.VehicleStateEnum.RIDING;
 import static org.junit.Assert.assertEquals;
 
 public class VehicleTest {
 
-    private Cell testCell = new Cell(1, 1, LogicalGrid.SINGLE);
+    private Cell singleCell = new Cell(1, 1, LogicalGrid.SINGLE);
 
     @BeforeClass
     public static void setUpClass() {
@@ -24,13 +25,13 @@ public class VehicleTest {
 
     @Test
     public void newVehicleShouldHaveIdleState() {
-        Vehicle v = new Vehicle(testCell);
+        Vehicle v = new Vehicle(singleCell);
         assertEquals(IDLE, v.getState());
     }
 
     @Test
     public void shouldBeDestroying() {
-        Vehicle v = new Vehicle(testCell);
+        Vehicle v = new Vehicle(singleCell);
         v.upLeft();
 
         assertEquals(DESTROYING, v.getState());
@@ -38,10 +39,11 @@ public class VehicleTest {
 
     @Test
     public void shouldDrive() {
-//        new Cell(1, )
-        Vehicle v = new Vehicle(testCell);
-        v.upLeft();
+        new Cell(1, 2, LogicalGrid.SINGLE).setTop(singleCell);
+        Vehicle v = new Vehicle(singleCell);
+        v.downLeft();
 
-        assertEquals(DESTROYING, v.getState());
+        assertEquals(RIDING, v.getState());
     }
+
 }

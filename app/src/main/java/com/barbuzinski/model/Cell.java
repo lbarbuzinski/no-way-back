@@ -1,6 +1,6 @@
 package com.barbuzinski.model;
 
-import com.barbuzinski.utils.position.StaticPosition;
+import com.barbuzinski.utils.StaticPosition;
 
 import static com.barbuzinski.model.LogicalGrid.EMPTY;
 

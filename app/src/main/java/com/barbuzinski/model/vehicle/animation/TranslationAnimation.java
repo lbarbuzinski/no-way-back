@@ -1,7 +1,7 @@
 package com.barbuzinski.model.vehicle.animation;
 
 import com.barbuzinski.utils.ProgressCompletedCallback;
-import com.barbuzinski.utils.position.StaticPosition;
+import com.barbuzinski.utils.StaticPosition;
 
 import java.util.Optional;
 

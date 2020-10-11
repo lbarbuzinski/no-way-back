@@ -1,9 +1,6 @@
-package com.barbuzinski.utils.animation;
+package com.barbuzinski.utils;
 
 import android.graphics.Canvas;
-
-import com.barbuzinski.utils.Progress;
-import com.barbuzinski.utils.ProgressCompletedCallback;
 
 public abstract class Animation {
 

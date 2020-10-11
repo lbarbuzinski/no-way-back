@@ -3,7 +3,7 @@ package com.barbuzinski.model;
 import android.view.MotionEvent;
 
 import com.barbuzinski.model.vehicle.Vehicle;
-import com.barbuzinski.utils.position.StaticPosition;
+import com.barbuzinski.utils.StaticPosition;
 
 public enum TouchSide {
 

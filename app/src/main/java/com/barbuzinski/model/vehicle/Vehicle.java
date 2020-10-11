@@ -6,7 +6,7 @@ import com.barbuzinski.model.Cell;
 import com.barbuzinski.model.vehicle.state.VehicleState;
 import com.barbuzinski.model.vehicle.state.VehicleStateEnum;
 import com.barbuzinski.model.vehicle.state.VehicleStateFactory;
-import com.barbuzinski.utils.position.StaticPosition;
+import com.barbuzinski.utils.StaticPosition;
 
 import java.util.Optional;
 

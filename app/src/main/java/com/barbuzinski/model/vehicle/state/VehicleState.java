@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 
 import com.barbuzinski.model.vehicle.Vehicle;
 import com.barbuzinski.model.vehicle.animation.VehicleAnimation;
-import com.barbuzinski.utils.position.StaticPosition;
+import com.barbuzinski.utils.StaticPosition;
 
 import java.util.Optional;
 

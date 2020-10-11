@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 
 import com.barbuzinski.model.GridSizeData;
 import com.barbuzinski.utils.ProgressCompletedCallback;
-import com.barbuzinski.utils.position.StaticPosition;
+import com.barbuzinski.utils.StaticPosition;
 
 import static com.barbuzinski.android.PaintFactory.FOR_VEHICLE;
 

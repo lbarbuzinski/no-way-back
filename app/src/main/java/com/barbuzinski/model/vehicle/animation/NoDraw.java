@@ -2,7 +2,7 @@ package com.barbuzinski.model.vehicle.animation;
 
 import android.graphics.Canvas;
 
-import com.barbuzinski.utils.position.StaticPosition;
+import com.barbuzinski.utils.StaticPosition;
 
 import java.util.Optional;
 

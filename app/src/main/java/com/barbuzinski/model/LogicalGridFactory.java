@@ -9,7 +9,7 @@ public class LogicalGridFactory {
         int[][] gridDefinition = {
                 {LogicalGrid.EMPTY, LogicalGrid.FIXED, LogicalGrid.EMPTY, LogicalGrid.EMPTY},
                 {LogicalGrid.EMPTY, LogicalGrid.FIXED, LogicalGrid.EMPTY, LogicalGrid.EMPTY},
-                {LogicalGrid.EMPTY, LogicalGrid.FIXED, LogicalGrid.FIXED, LogicalGrid.EMPTY},
+                {LogicalGrid.EMPTY, LogicalGrid.SINGLE, LogicalGrid.FIXED, LogicalGrid.EMPTY},
                 {LogicalGrid.EMPTY, LogicalGrid.EMPTY, LogicalGrid.FIXED, LogicalGrid.EMPTY}
         };
 

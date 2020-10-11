@@ -20,22 +20,27 @@ public class Idle extends VehicleState {
 
     @Override
     public VehicleState upLeft(Vehicle vehicle) {
-        return VehicleStateFactory.movedFromIdle(currentCell, currentCell.getLeft(), vehicle);
+        return onMoved(currentCell.getLeft(), vehicle);
     }
 
     @Override
     public VehicleState upRight(Vehicle vehicle) {
-        return VehicleStateFactory.movedFromIdle(currentCell, currentCell.getTop(), vehicle);
+        return onMoved(currentCell.getTop(), vehicle);
     }
 
     @Override
     public VehicleState downLeft(Vehicle vehicle) {
-        return VehicleStateFactory.movedFromIdle(currentCell, currentCell.getBottom(), vehicle);
+        return onMoved(currentCell.getBottom(), vehicle);
     }
 
     @Override
     public VehicleState downRight(Vehicle vehicle) {
-        return VehicleStateFactory.movedFromIdle(currentCell, currentCell.getRight(), vehicle);
+        return onMoved(currentCell.getRight(), vehicle);
+    }
+
+    private VehicleState onMoved(Cell destCell, Vehicle vehicle) {
+        currentCell.onRanOver();
+        return VehicleStateFactory.movedFromIdle(currentCell, destCell, vehicle);
     }
 
 }

@@ -6,22 +6,24 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
 import com.barbuzinski.model.vehicle.Vehicle;
-import com.barbuzinski.utils.position.StaticPosition;
+import com.barbuzinski.utils.StaticPosition;
 
 public class CustomGrid extends PavementGrid {
 
     private LogicalGrid logicalGrid;
+    private LogicalGridFactory logicalGridFactory;
     private Drawable drawableCell;
 
     public CustomGrid(DisplayMetrics metrics, LogicalGridFactory logicalGridFactory, Drawable drawableCell) {
         super(metrics);
-        this.logicalGrid = logicalGridFactory.createDefault(metrics);
+        this.logicalGridFactory = logicalGridFactory;
         this.drawableCell = drawableCell;
 
-        initVehicle();
+        reinit();
     }
 
-    private void initVehicle() {
+    private void reinit() {
+        this.logicalGrid = logicalGridFactory.createDefault(metrics);
         vehicle = new Vehicle(logicalGrid.getCell(1, 0));
     }
 
@@ -62,7 +64,7 @@ public class CustomGrid extends PavementGrid {
         }
 
         if (vehicle.isDestroyed())
-            initVehicle();
+            reinit();
 
         vehicle.draw(canvas);
     }

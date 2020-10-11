@@ -1,6 +1,6 @@
-package com.barbuzinski.utils.position;
+package com.barbuzinski.utils;
 
-public class StaticPosition implements Position {
+public class StaticPosition {
 
     private int x;
     private int y;
@@ -22,8 +22,4 @@ public class StaticPosition implements Position {
         return y;
     }
 
-    @Override
-    public StaticPosition getScreenPosition() {
-        return this;
-    }
 }

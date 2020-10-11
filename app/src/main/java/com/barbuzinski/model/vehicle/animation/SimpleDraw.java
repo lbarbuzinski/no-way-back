@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 
 import com.barbuzinski.android.PaintFactory;
 import com.barbuzinski.model.GridSizeData;
-import com.barbuzinski.utils.position.StaticPosition;
+import com.barbuzinski.utils.StaticPosition;
 
 import java.util.Optional;
 
