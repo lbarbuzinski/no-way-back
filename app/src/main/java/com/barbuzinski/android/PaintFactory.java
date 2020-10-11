@@ -5,13 +5,10 @@ import android.graphics.Paint;
 
 public class PaintFactory {
 
-    public Paint create(int red, int green, int blue) {
-        Paint p = new Paint();
-        p.setColor(Color.rgb(red, green, blue));
-        return p;
+    public static final Paint FOR_VEHICLE = new Paint();
+
+    static {
+        FOR_VEHICLE.setColor(Color.rgb(255, 0, 0));
     }
 
-    public Paint createForVehicle() {
-        return create(255, 0, 0);
-    }
 }

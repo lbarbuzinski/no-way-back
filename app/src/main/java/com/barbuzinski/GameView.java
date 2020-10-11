@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 
 import com.barbuzinski.android.DrawablesFactory;
 import com.barbuzinski.android.MetricsFactory;
-import com.barbuzinski.android.PaintFactory;
 import com.barbuzinski.model.CustomGrid;
 import com.barbuzinski.model.LogicalGridFactory;
 import com.barbuzinski.model.PavementGrid;
@@ -22,7 +21,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private MetricsFactory metricsFactory = new MetricsFactory();
     private DrawablesFactory drawableGridFactory = new DrawablesFactory();
-    private PaintFactory paintFactory = new PaintFactory();
     private LogicalGridFactory gridFactory = new LogicalGridFactory();
 
     private GameThread thread;
@@ -35,12 +33,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         grid = new CustomGrid(
                 metrics,
                 gridFactory,
-                drawableGridFactory.createDrawableCell(getContext().getResources()),
-                paintFactory);
-//        grid = new RectangularFixedGrid(
-//                metrics,
-//                drawableGridFactory.createDefaultGrid(getContext().getResources(), metrics),
-//                paintFactory);
+                drawableGridFactory.createDrawableCell(getContext().getResources()));
         getHolder().addCallback(this);
 
         paint = new Paint();

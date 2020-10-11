@@ -51,7 +51,7 @@ public class TouchSideTest {
 
         when(metricsFactory.create(context)).thenReturn(metrics);
 
-        grid = new CustomGrid(metrics, logicalGridFactory, drawableGrid, paintFactory);
+        grid = new CustomGrid(metrics, logicalGridFactory, drawableGrid);
     }
 
     @Test

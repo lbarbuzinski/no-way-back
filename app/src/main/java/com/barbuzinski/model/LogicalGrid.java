@@ -11,19 +11,17 @@ public class LogicalGrid {
     private int heightCellsIso;
 
     private Cell[][] cellsMatrix;
-    private GridSizeData gridSizeData;
 
-    public LogicalGrid(GridSizeData gridSizeData, Cell[][] cellsMatrix) {
-        this.gridSizeData = gridSizeData;
+    public LogicalGrid(Cell[][] cellsMatrix) {
         this.cellsMatrix = cellsMatrix;
     }
 
     public int getWidthCellsIso() {
-        return gridSizeData.getWidthCellsIso();
+        return GridSizeData.getWidthCellsIso();
     }
 
     public int getCellWidthPixels() {
-        return gridSizeData.getCellWidthPixels();
+        return GridSizeData.getCellWidthPixels();
     }
 
     public int getLogicalWidthCells() {

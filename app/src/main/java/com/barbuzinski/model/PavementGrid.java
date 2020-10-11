@@ -4,9 +4,9 @@ import android.graphics.Canvas;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
-public abstract class PavementGrid {
+import com.barbuzinski.model.vehicle.Vehicle;
 
-    static final int CELL_PADDING = 2;
+public abstract class PavementGrid {
 
     protected Vehicle vehicle;
 

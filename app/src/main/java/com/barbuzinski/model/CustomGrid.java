@@ -5,22 +5,24 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
-import com.barbuzinski.android.PaintFactory;
+import com.barbuzinski.model.vehicle.Vehicle;
+import com.barbuzinski.utils.position.StaticPosition;
 
 public class CustomGrid extends PavementGrid {
 
     private LogicalGrid logicalGrid;
     private Drawable drawableCell;
 
-    public CustomGrid(DisplayMetrics metrics, LogicalGridFactory logicalGridFactory, Drawable drawableCell, PaintFactory paintFactory) {
+    public CustomGrid(DisplayMetrics metrics, LogicalGridFactory logicalGridFactory, Drawable drawableCell) {
         super(metrics);
         this.logicalGrid = logicalGridFactory.createDefault(metrics);
         this.drawableCell = drawableCell;
 
-        vehicle = new Vehicle(
-                this,
-                logicalGrid.getCell(1, 0),
-                paintFactory);
+        initVehicle();
+    }
+
+    private void initVehicle() {
+        vehicle = new Vehicle(logicalGrid.getCell(1, 0));
     }
 
     @Override
@@ -46,7 +48,7 @@ public class CustomGrid extends PavementGrid {
             for (int j = 0; j < logicalGrid.getLogicalHeightCells(); j++) {
                 Cell cell = logicalGrid.getCell(i, j);
                 if (!cell.isEmpty()) {
-                    ScreenPosition centerPosition = cell.getPosition();
+                    StaticPosition centerPosition = cell.getPosition();
                     int x = centerPosition.getX() - getCellWidthPixels() / 2;
                     int y = centerPosition.getY() - getCellHeightPixels() / 2;
                     drawableCell.setBounds(
@@ -58,6 +60,9 @@ public class CustomGrid extends PavementGrid {
                 }
             }
         }
+
+        if (vehicle.isDestroyed())
+            initVehicle();
 
         vehicle.draw(canvas);
     }
