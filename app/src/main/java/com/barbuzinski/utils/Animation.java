@@ -14,7 +14,7 @@ public abstract class Animation {
         this(Progress.FROZEN);
     }
 
-    public Animation(int progressTimeMillis, ProgressCompletedCallback callback) {
+    public Animation(long progressTimeMillis, ProgressCompletedCallback callback) {
         this(new Progress(progressTimeMillis, callback));
     }
 

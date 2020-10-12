@@ -48,4 +48,19 @@
       android:strokeWidth="1"
       android:pathData="M200,50L200,150"
       android:strokeColor="#000000"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="M99.787,2.364l-95.106,47.66l94.893,47.446l94.894,-47.659z"
+      android:fillColor="#780000"
+      android:strokeColor="#000000"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="M2.34,53.853l0,94.469l95.32,47.872l-0.426,-94.468z"
+      android:fillColor="#C83232"
+      android:strokeColor="#000000"/>
+  <path
+      android:strokeWidth="1"
+      android:pathData="M197.66,53.428l-94.469,47.872l-1.063,95.319l95.957,-48.723z"
+      android:fillColor="#C83232"
+      android:strokeColor="#000000"/>
 </vector>

@@ -1,7 +1,8 @@
 package com.barbuzinski.model;
 
-import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+
+import com.barbuzinski.android.DrawablesRepository;
 
 import org.junit.Before;
 import org.mockito.Mock;
@@ -14,9 +15,9 @@ public class AbstractGameViewTest {
     protected Level level;
 
     @Mock
-    private Drawable drawableCell;
+    private DrawablesRepository drawablesRepository;
 
-    private LogicalGridFactory logicalGridFactory = new LogicalGridFactory();
+    private LogicalGridFactory logicalGridFactory = new LogicalGridFactory(drawablesRepository);
 
     @Before
     public void setUpAbstractGameViewTest() {
@@ -24,6 +25,6 @@ public class AbstractGameViewTest {
         metrics.widthPixels = WIDTH_PIXELS;
         metrics.heightPixels = HEIGHT_PIXELS;
 
-        level = new Level(metrics, logicalGridFactory, drawableCell);
+        level = new Level(metrics, logicalGridFactory);
     }
 }

@@ -1,6 +1,6 @@
 package com.barbuzinski.model.vehicle.state;
 
-import com.barbuzinski.model.Cell;
+import com.barbuzinski.model.vehicle.cell.Cell;
 import com.barbuzinski.model.vehicle.Vehicle;
 import com.barbuzinski.model.vehicle.animation.SimpleDraw;
 

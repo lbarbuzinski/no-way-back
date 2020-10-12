@@ -2,7 +2,6 @@ package com.barbuzinski.model;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
@@ -15,18 +14,16 @@ public class Level {
 
     private DisplayMetrics metrics;
     private LogicalGridFactory logicalGridFactory;
-    private Drawable drawableCell;
 
-    public Level(DisplayMetrics metrics, LogicalGridFactory logicalGridFactory, Drawable drawableCell) {
+    public Level(DisplayMetrics metrics, LogicalGridFactory logicalGridFactory) {
         this.metrics = metrics;
         this.logicalGridFactory = logicalGridFactory;
-        this.drawableCell = drawableCell;
 
         reinit();
     }
 
     private void reinit() {
-        grid = logicalGridFactory.createDefault(metrics, drawableCell);
+        grid = logicalGridFactory.createDefault(metrics);
         vehicle = new Vehicle(grid.getCell(1, 0));
     }
 

@@ -11,7 +11,7 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.barbuzinski.android.DrawablesFactory;
+import com.barbuzinski.android.DrawablesRepository;
 import com.barbuzinski.android.MetricsFactory;
 import com.barbuzinski.model.Level;
 import com.barbuzinski.model.LogicalGridFactory;
@@ -19,8 +19,8 @@ import com.barbuzinski.model.LogicalGridFactory;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private MetricsFactory metricsFactory = new MetricsFactory();
-    private DrawablesFactory drawableGridFactory = new DrawablesFactory();
-    private LogicalGridFactory gridFactory = new LogicalGridFactory();
+    private LogicalGridFactory gridFactory;
+    private DrawablesRepository drawablesRepository;
 
     private GameThread thread;
     private Level grid;
@@ -29,10 +29,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public GameView(Context context) {
         super(context);
         DisplayMetrics metrics = metricsFactory.create(getContext());
+        drawablesRepository = new DrawablesRepository(getContext().getResources());
+        gridFactory = new LogicalGridFactory(drawablesRepository);
         grid = new Level(
                 metrics,
-                gridFactory,
-                drawableGridFactory.createDrawableCell(getContext().getResources()));
+                gridFactory);
         getHolder().addCallback(this);
 
         paint = new Paint();

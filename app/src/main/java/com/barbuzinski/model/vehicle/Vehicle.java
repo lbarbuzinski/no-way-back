@@ -2,7 +2,7 @@ package com.barbuzinski.model.vehicle;
 
 import android.graphics.Canvas;
 
-import com.barbuzinski.model.Cell;
+import com.barbuzinski.model.vehicle.cell.Cell;
 import com.barbuzinski.model.vehicle.state.VehicleState;
 import com.barbuzinski.model.vehicle.state.VehicleStateEnum;
 import com.barbuzinski.model.vehicle.state.VehicleStateFactory;

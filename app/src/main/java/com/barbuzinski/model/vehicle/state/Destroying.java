@@ -1,6 +1,6 @@
 package com.barbuzinski.model.vehicle.state;
 
-import com.barbuzinski.model.Cell;
+import com.barbuzinski.model.vehicle.cell.Cell;
 import com.barbuzinski.model.vehicle.VehicleStateCallback;
 import com.barbuzinski.model.vehicle.animation.Destruction;
 

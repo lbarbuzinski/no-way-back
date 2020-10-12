@@ -1,12 +1,12 @@
 package com.barbuzinski.model.vehicle;
 
 import com.barbuzinski.model.AbstractGameViewTest;
-import com.barbuzinski.model.Cell;
-import com.barbuzinski.model.Grid;
+import com.barbuzinski.model.vehicle.cell.Cell;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.barbuzinski.model.vehicle.cell.CellStage.SINGLE;
 import static com.barbuzinski.model.vehicle.state.VehicleStateEnum.DESTROYING;
 import static com.barbuzinski.model.vehicle.state.VehicleStateEnum.IDLE;
 import static com.barbuzinski.model.vehicle.state.VehicleStateEnum.RIDING;
@@ -18,7 +18,7 @@ public class VehicleTest extends AbstractGameViewTest {
 
     @Before
     public void setUp() {
-        singleCell = new Cell(1, 1, Grid.SINGLE);
+        singleCell = new Cell(1, 1, SINGLE);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class VehicleTest extends AbstractGameViewTest {
 
     @Test
     public void shouldDrive() {
-        new Cell(1, 2, Grid.SINGLE).setTop(singleCell);
+        new Cell(1, 2, SINGLE).setTop(singleCell);
         Vehicle v = new Vehicle(singleCell);
         v.downLeft();
 
