@@ -9,7 +9,7 @@ import static com.barbuzinski.model.vehicle.cell.CellStage.EMPTY;
 
 public class Cell {
 
-    private DrawablesRepository drawablesRepository;
+    private CellFactory cellFactory;
 
     private Cell left;
     private Cell right;
@@ -18,35 +18,35 @@ public class Cell {
 
     private CellState cellState;
 
-    public Cell(int x, int y, CellStage stage, DrawablesRepository drawablesRepository) {
+    public Cell(int x, int y, CellStage stage, CellFactory cellFactory, DrawablesRepository drawablesRepository) {
+        this.cellFactory = cellFactory;
         cellState = new CellState(x, y, stage, drawablesRepository);
-        this.drawablesRepository = drawablesRepository;
     }
 
     public Cell getLeft() {
         if (left == null)
-            setLeft(new Cell(cellState.getX() - 1, cellState.getY(), EMPTY, drawablesRepository));
+            setLeft(cellFactory.createCell(cellState.getX() - 1, cellState.getY(), EMPTY));
 
         return left;
     }
 
     public Cell getRight() {
         if (right == null)
-            new Cell(cellState.getX() + 1, cellState.getY(), EMPTY, drawablesRepository).setLeft(this);
+            cellFactory.createCell(cellState.getX() + 1, cellState.getY(), EMPTY).setLeft(this);
 
         return right;
     }
 
     public Cell getTop() {
         if (top == null)
-            setTop(new Cell(cellState.getX(), cellState.getY() - 1, EMPTY, drawablesRepository));
+            setTop(cellFactory.createCell(cellState.getX(), cellState.getY() - 1, EMPTY));
 
         return top;
     }
 
     public Cell getBottom() {
         if (bottom == null)
-            new Cell(cellState.getX(), cellState.getY() + 1, EMPTY, drawablesRepository).setTop(this);
+            cellFactory.createCell(cellState.getX(), cellState.getY() + 1, EMPTY).setTop(this);
 
         return bottom;
     }

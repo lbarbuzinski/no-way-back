@@ -3,41 +3,33 @@ package com.barbuzinski;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.DisplayMetrics;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.barbuzinski.android.DrawablesRepository;
 import com.barbuzinski.android.MetricsFactory;
 import com.barbuzinski.model.Level;
 import com.barbuzinski.model.LogicalGridFactory;
 
-public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+import javax.inject.Inject;
 
-    private MetricsFactory metricsFactory = new MetricsFactory();
-    private LogicalGridFactory gridFactory;
-    private DrawablesRepository drawablesRepository;
+import dagger.hilt.android.qualifiers.ActivityContext;
+
+public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameThread thread;
     private Level grid;
-    private Paint paint;
 
-    public GameView(Context context) {
+    @Inject
+    public GameView(@ActivityContext Context context, MetricsFactory metricsFactory, LogicalGridFactory gridFactory) {
         super(context);
         DisplayMetrics metrics = metricsFactory.create(getContext());
-        drawablesRepository = new DrawablesRepository(getContext().getResources());
-        gridFactory = new LogicalGridFactory(drawablesRepository);
         grid = new Level(
                 metrics,
                 gridFactory);
         getHolder().addCallback(this);
-
-        paint = new Paint();
-        paint.setColor(Color.rgb(0, 0, 250));
 
         thread = new GameThread(getHolder(), this);
         setFocusable(true);

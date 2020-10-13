@@ -2,16 +2,19 @@ package com.barbuzinski.model;
 
 import android.util.DisplayMetrics;
 
-import com.barbuzinski.android.DrawablesRepository;
 import com.barbuzinski.model.vehicle.cell.Cell;
+import com.barbuzinski.model.vehicle.cell.CellFactory;
 import com.barbuzinski.model.vehicle.cell.CellStage;
+
+import javax.inject.Inject;
 
 public class LogicalGridFactory {
 
-    private DrawablesRepository drawablesRepository;
+    private final CellFactory cellFactory;
 
-    public LogicalGridFactory(DrawablesRepository drawablesRepository) {
-        this.drawablesRepository = drawablesRepository;
+    @Inject
+    public LogicalGridFactory(CellFactory cellFactory) {
+        this.cellFactory = cellFactory;
     }
 
     public Grid createDefault(DisplayMetrics metrics) {
@@ -27,7 +30,7 @@ public class LogicalGridFactory {
         Cell[][] cellsMatrix = new Cell[gridDefinition.length][gridDefinition[0].length];
         for (int i = 0; i < cellsMatrix.length; i++) {
             for (int j = 0; j < cellsMatrix[0].length; j++) {
-                Cell cell = new Cell(j, i, gridDefinition[i][j], drawablesRepository);
+                Cell cell = cellFactory.createCell(j, i, gridDefinition[i][j]);
                 cellsMatrix[i][j] = cell;
 
                 if (i > 0)
