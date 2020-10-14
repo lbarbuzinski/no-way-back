@@ -15,4 +15,8 @@ public abstract class VehicleAnimation extends Animation {
     }
 
     public abstract Optional<StaticPosition> getPosition();
+
+    public float progress() {
+        return progress.progress();
+    }
 }

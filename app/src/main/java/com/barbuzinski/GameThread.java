@@ -24,6 +24,8 @@ public class GameThread extends Thread {
 
     @Override
     public void run() {
+        long start = System.currentTimeMillis();
+        int counter = 0;
         while (running) {
             canvas = null;
             if (gameView.needsToBeRedrawn()) {
@@ -31,6 +33,11 @@ public class GameThread extends Thread {
                     canvas = this.surfaceHolder.lockCanvas();
                     synchronized (surfaceHolder) {
                         this.gameView.draw(canvas);
+                        counter++;
+                        if (System.currentTimeMillis() - start > 10000) {
+                            System.out.println(counter);
+                            return;
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

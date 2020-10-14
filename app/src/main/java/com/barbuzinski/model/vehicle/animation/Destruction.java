@@ -12,8 +12,11 @@ public class Destruction extends TranslationAnimation {
 
     private static final int DESTRUCTION_TIME_MILLIS = 200;
 
-    public Destruction(StaticPosition start, StaticPosition end, ProgressCompletedCallback callback) {
+    private final GridData gridData;
+
+    public Destruction(GridData gridData, StaticPosition start, StaticPosition end, ProgressCompletedCallback callback) {
         super(DESTRUCTION_TIME_MILLIS, callback, start, end);
+        this.gridData = gridData;
     }
 
     @Override
@@ -22,8 +25,8 @@ public class Destruction extends TranslationAnimation {
         FOR_VEHICLE.setAlpha((int) (255 * (1.0f - progress)));
 
         StaticPosition position = position(progress);
-        canvas.drawCircle(position.getX(), (float) (position.getY() - GridData.getCellHeightPixels() / 3),
-                GridData.getCellWidthPixels() / 3 - 2,
+        canvas.drawCircle(position.getX(), (float) (position.getY() - gridData.getCellHeightPixels() / 3),
+                gridData.getCellWidthPixels() / 3 - 2,
                 FOR_VEHICLE);
     }
 }

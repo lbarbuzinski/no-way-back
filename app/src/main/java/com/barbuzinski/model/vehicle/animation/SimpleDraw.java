@@ -12,17 +12,19 @@ import static com.barbuzinski.android.PaintFactory.FOR_VEHICLE;
 
 public class SimpleDraw extends VehicleAnimation {
 
-    protected StaticPosition position;
+    private final GridData gridData;
+    private final StaticPosition position;
 
-    public SimpleDraw(StaticPosition position) {
+    public SimpleDraw(GridData gridData, StaticPosition position) {
+        this.gridData = gridData;
         this.position = position;
     }
 
     @Override
     public void draw(Canvas canvas) {
         FOR_VEHICLE.setAlpha(255);
-        canvas.drawCircle(position.getX(), (float) (position.getY() - GridData.getCellHeightPixels() / 3),
-                GridData.getCellWidthPixels() / 3 - 2,
+        canvas.drawCircle(position.getX(), (float) (position.getY() - gridData.getCellHeightPixels() / 3),
+                gridData.getCellWidthPixels() / 3 - 2,
                 PaintFactory.FOR_VEHICLE);
     }
 

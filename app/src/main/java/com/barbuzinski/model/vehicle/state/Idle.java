@@ -1,15 +1,15 @@
 package com.barbuzinski.model.vehicle.state;
 
-import com.barbuzinski.model.vehicle.cell.Cell;
 import com.barbuzinski.model.vehicle.Vehicle;
-import com.barbuzinski.model.vehicle.animation.SimpleDraw;
+import com.barbuzinski.model.vehicle.animation.VehicleAnimationFactory;
+import com.barbuzinski.model.cell.Cell;
 
 public class Idle extends VehicleState {
 
     private Cell currentCell;
 
-    public Idle(Cell currentCell) {
-        super(new SimpleDraw(currentCell.getPosition()));
+    public Idle(VehicleStateFactory vehicleStateFactory, VehicleAnimationFactory vehicleAnimationFactory, Cell currentCell) {
+        super(vehicleStateFactory, vehicleAnimationFactory, vehicleAnimationFactory.simpleDraw(currentCell.getPosition()));
         this.currentCell = currentCell;
     }
 
@@ -40,7 +40,7 @@ public class Idle extends VehicleState {
 
     private VehicleState onMoved(Cell destCell, Vehicle vehicle) {
         currentCell.onRanOver();
-        return VehicleStateFactory.movedFromIdle(currentCell, destCell, vehicle);
+        return vehicleStateFactory.movedFromIdle(currentCell, destCell, vehicle);
     }
 
 }

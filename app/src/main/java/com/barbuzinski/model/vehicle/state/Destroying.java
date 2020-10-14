@@ -1,15 +1,19 @@
 package com.barbuzinski.model.vehicle.state;
 
-import com.barbuzinski.model.vehicle.cell.Cell;
 import com.barbuzinski.model.vehicle.VehicleStateCallback;
-import com.barbuzinski.model.vehicle.animation.Destruction;
-
-import static com.barbuzinski.model.vehicle.state.VehicleStateFactory.destroyed;
+import com.barbuzinski.model.vehicle.animation.VehicleAnimationFactory;
+import com.barbuzinski.model.cell.Cell;
 
 public class Destroying extends VehicleState {
 
-    public Destroying(Cell currentCell, Cell destCell, VehicleStateCallback callback) {
-        super(new Destruction(currentCell.getPosition(), destCell.getPosition(), () -> callback.onStateChanged(destroyed())));
+    public Destroying(VehicleStateFactory vehicleStateFactory, VehicleAnimationFactory vehicleAnimationFactory, Cell currentCell, Cell destCell, VehicleStateCallback callback) {
+        super(
+                vehicleStateFactory,
+                vehicleAnimationFactory,
+                vehicleAnimationFactory.destruction(
+                        currentCell.getPosition(),
+                        destCell.getPosition(),
+                        () -> callback.onStateChanged(vehicleStateFactory.destroyed())));
     }
 
     @Override

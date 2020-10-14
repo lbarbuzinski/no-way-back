@@ -3,15 +3,14 @@ package com.barbuzinski;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.util.DisplayMetrics;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.barbuzinski.android.MetricsFactory;
 import com.barbuzinski.model.Level;
 import com.barbuzinski.model.LogicalGridFactory;
+import com.barbuzinski.model.vehicle.VehicleFactory;
 
 import javax.inject.Inject;
 
@@ -23,12 +22,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Level grid;
 
     @Inject
-    public GameView(@ActivityContext Context context, MetricsFactory metricsFactory, LogicalGridFactory gridFactory) {
+    public GameView(@ActivityContext Context context, VehicleFactory vehicleFactory, LogicalGridFactory gridFactory) {
         super(context);
-        DisplayMetrics metrics = metricsFactory.create(getContext());
-        grid = new Level(
-                metrics,
-                gridFactory);
+        grid = new Level(gridFactory, vehicleFactory);
         getHolder().addCallback(this);
 
         thread = new GameThread(getHolder(), this);

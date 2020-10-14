@@ -1,10 +1,8 @@
 package com.barbuzinski.model;
 
-import android.util.DisplayMetrics;
-
-import com.barbuzinski.model.vehicle.cell.Cell;
-import com.barbuzinski.model.vehicle.cell.CellFactory;
-import com.barbuzinski.model.vehicle.cell.CellStage;
+import com.barbuzinski.model.cell.Cell;
+import com.barbuzinski.model.cell.CellFactory;
+import com.barbuzinski.model.cell.CellStage;
 
 import javax.inject.Inject;
 
@@ -17,15 +15,13 @@ public class LogicalGridFactory {
         this.cellFactory = cellFactory;
     }
 
-    public Grid createDefault(DisplayMetrics metrics) {
+    public Grid createDefault() {
         CellStage[][] gridDefinition = {
                 {CellStage.EMPTY, CellStage.FIXED, CellStage.EMPTY, CellStage.EMPTY},
                 {CellStage.EMPTY, CellStage.DOUBLE, CellStage.EMPTY, CellStage.EMPTY},
                 {CellStage.EMPTY, CellStage.DOUBLE, CellStage.DOUBLE, CellStage.EMPTY},
                 {CellStage.EMPTY, CellStage.EMPTY, CellStage.SINGLE, CellStage.EMPTY}
         };
-        int widthCellsIso = 2;
-        GridData.init(widthCellsIso, 0.5f, metrics);
 
         Cell[][] cellsMatrix = new Cell[gridDefinition.length][gridDefinition[0].length];
         for (int i = 0; i < cellsMatrix.length; i++) {

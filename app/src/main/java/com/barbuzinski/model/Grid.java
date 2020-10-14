@@ -2,7 +2,7 @@ package com.barbuzinski.model;
 
 import android.graphics.Canvas;
 
-import com.barbuzinski.model.vehicle.cell.Cell;
+import com.barbuzinski.model.cell.Cell;
 
 public class Grid {
 
@@ -30,5 +30,9 @@ public class Grid {
                 getCell(i, j).draw(canvas);
             }
         }
+    }
+
+    public Cell getInitialCell() {
+        return getCell(1, 0);
     }
 }

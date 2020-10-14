@@ -1,4 +1,4 @@
-package com.barbuzinski.model.vehicle.cell;
+package com.barbuzinski.model.cell;
 
 import com.barbuzinski.R;
 

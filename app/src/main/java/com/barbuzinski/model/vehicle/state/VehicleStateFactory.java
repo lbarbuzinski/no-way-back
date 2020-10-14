@@ -1,21 +1,32 @@
 package com.barbuzinski.model.vehicle.state;
 
-import com.barbuzinski.model.vehicle.cell.Cell;
 import com.barbuzinski.model.vehicle.Vehicle;
+import com.barbuzinski.model.vehicle.animation.VehicleAnimationFactory;
+import com.barbuzinski.model.cell.Cell;
+
+import javax.inject.Inject;
 
 public class VehicleStateFactory {
 
-    public static VehicleState idle(Cell cell) {
-        return new Idle(cell);
+    private final VehicleAnimationFactory vehicleAnimationFactory;
+
+    @Inject
+    public VehicleStateFactory(VehicleAnimationFactory vehicleAnimationFactory) {
+        this.vehicleAnimationFactory = vehicleAnimationFactory;
     }
 
-    public static VehicleState movedFromIdle(Cell currentCell, Cell destCell, Vehicle vehicle) {
+    public VehicleState idle(Cell cell) {
+        return new Idle(this, vehicleAnimationFactory, cell);
+    }
+
+    public VehicleState movedFromIdle(Cell currentCell, Cell destCell, Vehicle vehicle) {
         return destCell.isEmpty() ?
-                new Destroying(currentCell, destCell, vehicle) :
-                new Riding(currentCell, destCell, vehicle);
+                new Destroying(this, vehicleAnimationFactory, currentCell, destCell, vehicle) :
+                new Riding(this, vehicleAnimationFactory, currentCell, destCell, vehicle);
     }
 
-    public static VehicleState destroyed() {
-        return new Destroyed();
+    public VehicleState destroyed() {
+        return new Destroyed(this, vehicleAnimationFactory);
     }
+
 }

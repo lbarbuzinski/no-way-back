@@ -2,29 +2,29 @@ package com.barbuzinski.model;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
 import com.barbuzinski.model.vehicle.Vehicle;
+import com.barbuzinski.model.vehicle.VehicleFactory;
 
 public class Level {
 
     protected Vehicle vehicle;
     protected Grid grid;
 
-    private DisplayMetrics metrics;
     private LogicalGridFactory logicalGridFactory;
+    private VehicleFactory vehicleFactory;
 
-    public Level(DisplayMetrics metrics, LogicalGridFactory logicalGridFactory) {
-        this.metrics = metrics;
+    public Level(LogicalGridFactory logicalGridFactory, VehicleFactory vehicleFactory) {
         this.logicalGridFactory = logicalGridFactory;
+        this.vehicleFactory = vehicleFactory;
 
         reinit();
     }
 
     private void reinit() {
-        grid = logicalGridFactory.createDefault(metrics);
-        vehicle = new Vehicle(grid.getCell(1, 0));
+        grid = logicalGridFactory.createDefault();
+        vehicle = vehicleFactory.create(grid);
     }
 
     public void draw(Canvas canvas) {

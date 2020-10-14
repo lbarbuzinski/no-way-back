@@ -1,11 +1,10 @@
-package com.barbuzinski.model.vehicle.cell;
+package com.barbuzinski.model.cell;
 
 import android.graphics.Canvas;
 
-import com.barbuzinski.android.DrawablesRepository;
 import com.barbuzinski.utils.StaticPosition;
 
-import static com.barbuzinski.model.vehicle.cell.CellStage.EMPTY;
+import static com.barbuzinski.model.cell.CellStage.EMPTY;
 
 public class Cell {
 
@@ -18,9 +17,9 @@ public class Cell {
 
     private CellState cellState;
 
-    public Cell(int x, int y, CellStage stage, CellFactory cellFactory, DrawablesRepository drawablesRepository) {
+    public Cell(CellFactory cellFactory, CellStateFactory cellStateFactory, int x, int y, CellStage stage) {
         this.cellFactory = cellFactory;
-        cellState = new CellState(x, y, stage, drawablesRepository);
+        cellState = cellStateFactory.create(x, y, stage);
     }
 
     public Cell getLeft() {

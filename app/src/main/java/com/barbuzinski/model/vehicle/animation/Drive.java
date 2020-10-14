@@ -12,8 +12,11 @@ public class Drive extends TranslationAnimation {
 
     private static final int DRIVE_TIME_MILLIS = 200;
 
-    public Drive(StaticPosition start, StaticPosition end, ProgressCompletedCallback callback) {
+    private final GridData gridData;
+
+    public Drive(GridData gridData, StaticPosition start, StaticPosition end, ProgressCompletedCallback callback) {
         super(DRIVE_TIME_MILLIS, callback, start, end);
+        this.gridData = gridData;
     }
 
     @Override
@@ -21,8 +24,8 @@ public class Drive extends TranslationAnimation {
         FOR_VEHICLE.setAlpha(255);
 
         StaticPosition position = position(progress.progress());
-        canvas.drawCircle(position.getX(), (float) (position.getY() - GridData.getCellHeightPixels() / 3),
-                GridData.getCellWidthPixels() / 3 - 2,
+        canvas.drawCircle(position.getX(), (float) (position.getY() - gridData.getCellHeightPixels() / 3),
+                gridData.getCellWidthPixels() / 3 - 2,
                 FOR_VEHICLE);
     }
 }

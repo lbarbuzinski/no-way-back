@@ -2,30 +2,33 @@ package com.barbuzinski.model;
 
 import android.util.DisplayMetrics;
 
+import javax.inject.Inject;
+
 public class GridData {
 
-    private static int widthCellsIso;
-    private static float cellWidthToHeightRatio;
-    private static DisplayMetrics metrics;
+    private static final Float CELL_WIDTH_TO_HEIGHT_RATIO = 0.5f;
 
-    private GridData() {}
+    private DisplayMetrics metrics;
+    private Integer cellWidthPixels;
+    private Integer widthCellsIso;
 
-    public static void init(int widthCellsIso, float cellWidthToHeightRatio, DisplayMetrics metrics) {
-        GridData.widthCellsIso = widthCellsIso;
-        GridData.cellWidthToHeightRatio = cellWidthToHeightRatio;
-        GridData.metrics = metrics;
+    @Inject
+    public GridData(DisplayMetrics metrics, Integer widthCellsIso) {
+        this.metrics = metrics;
+        this.cellWidthPixels = metrics.widthPixels / widthCellsIso;
+        this.widthCellsIso = widthCellsIso;
     }
 
-    public static int getWidthCellsIso() {
+    public int getWidthCellsIso() {
         return widthCellsIso;
     }
 
-    public static int getCellWidthPixels() {
-        return metrics.widthPixels / widthCellsIso;
+    public int getCellWidthPixels() {
+        return cellWidthPixels;
     }
 
-    public static int getCellHeightPixels() {
-        return (int) (getCellWidthPixels() * cellWidthToHeightRatio);
+    public int getCellHeightPixels() {
+        return (int) (getCellWidthPixels() * CELL_WIDTH_TO_HEIGHT_RATIO);
     }
 
 }

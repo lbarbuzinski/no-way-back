@@ -1,11 +1,11 @@
 package com.barbuzinski.model.vehicle.state;
 
-import com.barbuzinski.model.vehicle.animation.NoDraw;
+import com.barbuzinski.model.vehicle.animation.VehicleAnimationFactory;
 
 public class Destroyed extends VehicleState {
 
-    public Destroyed() {
-        super(new NoDraw());
+    public Destroyed(VehicleStateFactory vehicleStateFactory, VehicleAnimationFactory vehicleAnimationFactory) {
+        super(vehicleStateFactory, vehicleAnimationFactory, vehicleAnimationFactory.noDraw());
     }
 
     @Override

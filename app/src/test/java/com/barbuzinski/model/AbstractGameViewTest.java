@@ -25,6 +25,6 @@ public class AbstractGameViewTest {
         metrics.widthPixels = WIDTH_PIXELS;
         metrics.heightPixels = HEIGHT_PIXELS;
 
-        level = new Level(metrics, logicalGridFactory);
+        level = new Level(logicalGridFactory);
     }
 }
